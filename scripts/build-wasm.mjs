@@ -15,6 +15,10 @@ if (!/^[0-9a-f]{7,40}$/i.test(pin)) {
 const work = await mkdtemp(path.join(tmpdir(), "grammar-cpp-build-"));
 await run("git", ["clone", "--no-checkout", "https://github.com/tree-sitter/tree-sitter-cpp.git", "src"], { cwd: work });
 await run("git", ["checkout", pin], { cwd: path.join(work, "src") });
+    // Install the grammar's own deps — grammar.js cross-requires a sibling
+    // grammar package (tree-sitter-javascript / tree-sitter-c), without which
+    // `tree-sitter generate` can't load grammar.js.
+    await run("npm", ["install"], { cwd: path.join(work, "src") });
 await run("npm", ["install", "--no-save", "tree-sitter-cli@^0.26.0"], { cwd: work });
 
 const cli = path.join(work, "node_modules", ".bin", "tree-sitter");
