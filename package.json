@@ -1,6 +1,6 @@
 {
     "name": "@plurnk/plurnk-mimetypes-grammar-cpp",
-    "version": "0.1.5",
+    "version": "1.0.0",
     "description": "Pre-built tree-sitter-cpp WASM grammar for @plurnk/plurnk-mimetypes.",
     "type": "module",
     "license": "MIT",
